@@ -99,7 +99,7 @@ No secrets required for CI.
 ---
 
 <img width="1555" height="808" alt="Screenshot 2026-03-11 at 9 51 43 AM" src="https://github.com/user-attachments/assets/c468931c-0572-4c8e-b2a6-556d8a043e8e" />
-<img width="1393" height="800" alt="Screenshot 2026-03-11 at 9 51 07 AM" src="https://github.com/user-attachments/assets/f4ea09f1-3cfe-424d-8a0a-4f2e0205aa30" />
+<img width="1506" height="788" alt="Screenshot 2026-03-11 at 10 00 56 AM" src="https://github.com/user-attachments/assets/29277d84-e657-4416-b82a-eb793458b00c" />
 <img width="1660" height="849" alt="Screenshot 2026-03-11 at 9 54 58 AM" src="https://github.com/user-attachments/assets/ebbda94a-2ec3-459e-a799-6d923d4ab4b9" />
 <img width="1695" height="830" alt="Screenshot 2026-03-11 at 9 55 15 AM" src="https://github.com/user-attachments/assets/8b851ab9-2b3f-47f3-8cf3-12e98370ddd0" />
 
