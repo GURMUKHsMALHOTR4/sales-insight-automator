@@ -122,6 +122,7 @@ No secrets required for CI.
 <img width="1603" height="768" alt="Screenshot 2026-03-11 at 10 01 25 AM" src="https://github.com/user-attachments/assets/8e2e2e43-d837-44d4-b4eb-e22738dda87d" />
 <img width="1660" height="849" alt="Screenshot 2026-03-11 at 9 54 58 AM" src="https://github.com/user-attachments/assets/ebbda94a-2ec3-459e-a799-6d923d4ab4b9" />
 <img width="1695" height="830" alt="Screenshot 2026-03-11 at 9 55 15 AM" src="https://github.com/user-attachments/assets/8b851ab9-2b3f-47f3-8cf3-12e98370ddd0" />
-![sales_data_summary_email](https://github.com/user-attachments/assets/68fc9c88-9bf6-46cd-825d-891754c09582)
+<img width="426" height="839" alt="Screenshot 2026-03-11 at 10 25 30 AM" src="https://github.com/user-attachments/assets/b8614404-1d46-4968-8da3-867bd71122b7" />
+
 
 
