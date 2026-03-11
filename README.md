@@ -4,6 +4,18 @@ Upload sales data (CSV/XLSX), get an AI-generated executive summary, and receive
 
 ---
 
+## Live
+
+| | URL |
+|---|-----|
+| **Frontend** | [https://sales-insight-automator-rouge.vercel.app](https://sales-insight-automator-rouge.vercel.app) |
+| **Backend** | [https://sales-insight-automator-ahwi.onrender.com](https://sales-insight-automator-ahwi.onrender.com) |
+| **Swagger / API docs** | [https://sales-insight-automator-ahwi.onrender.com/docs](https://sales-insight-automator-ahwi.onrender.com/docs) |
+
+*Backend may take 30–60s to respond on first request (Render free tier cold start).*
+
+---
+
 ## Quick start
 
 ### Option 1: Docker (recommended)
@@ -58,7 +70,15 @@ Open http://localhost:3000. Set `NEXT_PUBLIC_API_URL=http://localhost:8000` in `
 - **GET /health** — Health check for load balancers.
 - **POST /api/insight** — Upload a file and recipient email (form-data: `file`, `recipient_email`). Returns summary and sends email when `RESEND_API_KEY` is set.
 
-Live docs: **http://localhost:8000/docs** (Swagger) and **http://localhost:8000/redoc**.
+Live docs (local): **http://localhost:8000/docs** (Swagger) and **http://localhost:8000/redoc**.  
+Deployed: [Backend /docs](https://sales-insight-automator-ahwi.onrender.com/docs).
+
+---
+
+## Deployment
+
+- **Frontend:** [Vercel](https://vercel.com) — connect repo, root directory `frontend`, set `NEXT_PUBLIC_API_URL` to the backend URL.
+- **Backend:** [Render](https://render.com) — connect repo, root directory `backend`, use Dockerfile. Set `RESEND_API_KEY` and `CORS_ORIGINS` (your frontend URL) in Environment.
 
 ---
 
