@@ -2,10 +2,15 @@
 Sales Insight Automator - FastAPI backend.
 Provides health check and insight generation endpoint.
 """
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.services.parser import parse_sales_file
+from app.services.llm import generate_sales_summary
+from app.services.email import send_sales_summary_email
 
 app = FastAPI(
     title="Sales Insight Automator API",
@@ -37,7 +42,7 @@ async def create_insight(
 ):
     """
     Upload a sales data file (CSV or XLSX) and recipient email.
-    Parses the file; LLM summary and email will be wired in next steps.
+    Parses the file, generates a summary, and sends it to the recipient (if RESEND_API_KEY is set).
     """
     if not file.filename:
         return {"success": False, "error": "No file provided"}
@@ -52,11 +57,22 @@ async def create_insight(
     except ValueError as e:
         return {"success": False, "error": str(e)}
 
+    try:
+        summary = generate_sales_summary(records)
+    except ValueError as e:
+        return {"success": False, "error": str(e)}
+    except Exception as e:
+        return {"success": False, "error": f"Summary generation failed: {e}"}
+
+    email_sent, email_message = send_sales_summary_email(recipient_email, summary, file.filename or "sales_data")
+
     return {
         "success": True,
-        "message": "File parsed successfully",
+        "message": "Summary generated" + (" and sent by email." if email_sent else "."),
         "filename": file.filename,
         "recipient_email": recipient_email,
         "rows_parsed": len(records),
-        "columns": list(records[0].keys()) if records else [],
+        "summary": summary,
+        "email_sent": email_sent,
+        "email_message": email_message,
     }
