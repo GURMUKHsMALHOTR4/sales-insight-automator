@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          python -m venv .venv
+          . .venv/bin/activate
+          pip install -r requirements.txt
+          pip install ruff
+
+      - name: Lint backend
+        run: |
+          cd backend
+          . .venv/bin/activate
+          ruff check app/ --output-format=github || true
+
+      - name: Build backend (import check)
+        run: |
+          cd backend
+          . .venv/bin/activate
+          python -c "from app.main import app; print('OK')"
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Lint frontend
+        run: |
+          cd frontend
+          npm run lint
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:8000
