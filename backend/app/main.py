@@ -1,9 +1,11 @@
 """
 Sales Insight Automator - FastAPI backend.
-Provides health check and insight generation endpoint (stub).
+Provides health check and insight generation endpoint.
 """
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+
+from app.services.parser import parse_sales_file
 
 app = FastAPI(
     title="Sales Insight Automator API",
@@ -35,18 +37,26 @@ async def create_insight(
 ):
     """
     Upload a sales data file (CSV or XLSX) and recipient email.
-    Returns a placeholder until parser + LLM + email are wired.
+    Parses the file; LLM summary and email will be wired in next steps.
     """
-    # Stub: validate file type
     if not file.filename:
         return {"success": False, "error": "No file provided"}
-    ext = (file.filename or "").lower().split(".")[-1]
-    if ext not in ("csv", "xlsx"):
-        return {"success": False, "error": "Only .csv and .xlsx files are allowed"}
+
+    try:
+        content = await file.read()
+    except Exception as e:
+        return {"success": False, "error": f"Failed to read file: {e}"}
+
+    try:
+        records = parse_sales_file(content, file.filename)
+    except ValueError as e:
+        return {"success": False, "error": str(e)}
 
     return {
         "success": True,
-        "message": "Stub: file received",
+        "message": "File parsed successfully",
         "filename": file.filename,
         "recipient_email": recipient_email,
+        "rows_parsed": len(records),
+        "columns": list(records[0].keys()) if records else [],
     }
