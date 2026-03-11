@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+.env
+.env.local
+*.egg-info/
+.eggs/
+
+# Node
+node_modules/
+.next/
+out/
+.npm
+*.log
+
+# IDE / OS
+.idea/
+.DS_Store
+*.swp
+.cursor/
+
+# Build / Docker
+dist/
+*.egg
